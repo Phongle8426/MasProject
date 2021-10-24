@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    tools:context=".ui.activity.LoginActivity">
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/logo_mas"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/login_gb">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Đăng nhập"
+            android:textStyle="bold"
+            android:textColor="@color/colorText"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="20sp"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputUserName"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:startIconDrawable="@drawable/ic_baseline_person_24"
+            android:layout_margin="10dp">
+            <EditText
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/edtUserName"
+                android:hint="Ten dang nhap"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:background="@drawable/input_bg"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputPassword"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24"
+            android:layout_marginTop="10dp"
+            android:layout_margin="10dp">
+            <EditText
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/edtPassword"
+                android:hint="Mat khau"
+                android:clickable="true"
+                android:maxLines="1"
+                android:background="@drawable/input_bg"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:textAllCaps="false"
+            android:background="@drawable/button_bg"
+            android:text="Continue"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
