@@ -13,64 +13,87 @@
         android:src="@drawable/logo_mas"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_marginTop="20dp"
-        android:background="@drawable/login_gb">
+        android:background="@drawable/login_gb"
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Đăng nhập"
-            android:textStyle="bold"
-            android:textColor="@color/colorText"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:textSize="20sp"/>
+            android:text="Đăng nhập"
+            android:textColor="@color/colorText"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputUserName"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            app:startIconDrawable="@drawable/ic_baseline_person_24"
-            android:layout_margin="10dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="Tên đăng nhập"
+            app:startIconDrawable="@drawable/ic_baseline_person_24">
+
             <EditText
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
                 android:id="@+id/edtUserName"
-                android:hint="Ten dang nhap"
-                android:clickable="true"
-                android:focusableInTouchMode="true"
-                android:background="@drawable/input_bg"
-                android:maxLines="1"/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputPassword"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            app:startIconDrawable="@drawable/ic_baseline_lock_24"
-            android:layout_marginTop="10dp"
-            android:layout_margin="10dp">
-            <EditText
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:id="@+id/edtPassword"
-                android:hint="Mat khau"
-                android:clickable="true"
-                android:maxLines="1"
-                android:background="@drawable/input_bg"/>
+                android:layout_height="wrap_content"
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:hint="Mật khẩu"
+            app:passwordToggleEnabled="true"
+            android:clickable="true"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24">
+
+            <EditText
+                android:id="@+id/edtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:clickable="true"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:textColor="#D50000"
+            android:textSize="15sp"
+            android:visibility="gone"/>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:progressTint="@color/design_default_color_secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
         <Button
+            android:id="@+id/btnLogin"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            android:textAllCaps="false"
             android:background="@drawable/button_bg"
             android:text="Continue"
-            android:textSize="18sp"/>
+            android:textAllCaps="false"
+            android:textSize="18sp" />
 
     </LinearLayout>
 

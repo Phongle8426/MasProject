@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/background"
+    android:background="#BAE4E4E4"
     tools:context=".ui.fragment.HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:orientation="vertical"
-        android:background="@color/design_default_color_secondary">
+        android:background="@drawable/header_bg"
+        tools:ignore="MissingConstraints">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -19,69 +21,99 @@
             android:layout_marginTop="10dp"
             android:text="Xin chào,"
             android:textSize="23sp"
-            android:textColor="@color/half_black"/>
+            android:textColor="@color/white"/>
         <TextView
             android:id="@+id/tvUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:text="Ngo Huu Quoc Thang"
-            android:textSize="23sp"
-            android:textColor="@color/half_black"/>
-        <TextView
-            android:id="@+id/tv3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="info here"
-            android:textSize="23sp"
-            android:textColor="@color/half_black"/>
-        <TextView
-            android:id="@+id/tv4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="info here"
-            android:textSize="23sp"
-            android:textColor="@color/half_black"/>
+            android:text="User 007"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:layout_marginTop="300dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/logo_mas"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp">
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/logo_mas"
-            android:layout_gravity="center_horizontal"/>
-        <TextView
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Some Slogan in here!"
-            android:textColor="@color/white"
-            android:textSize="23sp"
-            android:layout_gravity="bottom"/>
+            android:layout_weight="1">
+            <androidx.cardview.widget.CardView
+                android:layout_width="130dp"
+                android:layout_height="150dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="20dp"
+                android:layout_marginTop="120dp"
+                android:layout_marginStart="30dp"
+                android:focusable="true">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/covid1"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="21sp"
+                        android:textColor="@color/colorText"
+                        android:text="Thông báo"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnSupport"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_width="130dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="10dp"
+            app:cardMaxElevation="10dp"
+            android:layout_marginTop="120dp"
+            android:layout_marginEnd="30dp"
+            android:focusable="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/covid2"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="21sp"
+                    android:textColor="@color/colorText"
+                    android:text="Hỗ trợ"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
-    <Button
-        android:id="@+id/btnKhaiBao"
-        android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/button_bg"
-        android:text="Khai Báo Y Tế"/>
 
-    <Button
-        android:id="@+id/btnRequestSupport"
-        android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/button_bg"
-        android:text="Yêu Cầu Hỗ Trợ"/>
-
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

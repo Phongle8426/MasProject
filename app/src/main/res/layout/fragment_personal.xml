@@ -63,8 +63,10 @@
                 android:textSize="18sp"
                 android:textStyle="bold"/>
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_manage_acc"
+                android:id="@+id/cardInfoPersonal"
                 android:layout_width="match_parent"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:layout_height="50dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -79,14 +81,17 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
-                        android:text="Thông tin cá nhân"
+                        android:text="Thông tin hộ dân"
                         android:textColor="@color/colorText"
                         android:fontFamily="sans-serif-light"
                         android:textSize="18sp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardFamily"
                 android:layout_width="match_parent"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:layout_height="50dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -109,6 +114,8 @@
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:layout_height="50dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -152,6 +159,8 @@
                 android:textStyle="bold"/>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:layout_height="50dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -174,6 +183,8 @@
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:layout_height="50dp">
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.masapp.ui.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalFragment"
+        android:name="com.example.masapp.ui.fragment.PersonalFragment"
+        android:label="fragment_personal"
+        tools:layout="@layout/fragment_personal" >
+        <action
+            android:id="@+id/action_personalFragment_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
+        <action
+            android:id="@+id/action_personalFragment_to_familyFragment"
+            app:destination="@id/familyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="com.example.masapp.ui.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/familyFragment"
+        android:name="com.example.masapp.ui.fragment.familyFragment"
+        android:label="fragment_family"
+        tools:layout="@layout/fragment_family" >
+        <action
+            android:id="@+id/action_familyFragment_to_addNewMemberFragment"
+            app:destination="@id/addNewMemberFragment" />
+        <action
+            android:id="@+id/action_familyFragment_to_familyDetailFragment"
+            app:destination="@id/familyDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewMemberFragment"
+        android:name="com.example.masapp.ui.fragment.AddNewMemberFragment"
+        android:label="fragment_add_new_member"
+        tools:layout="@layout/fragment_add_new_member" />
+    <fragment
+        android:id="@+id/familyDetailFragment"
+        android:name="com.example.masapp.ui.fragment.FamilyDetailFragment"
+        android:label="fragment_family_detail"
+        tools:layout="@layout/fragment_family_detail" />
+    <fragment
+        android:id="@+id/requestSupportFragment"
+        android:name="com.example.masapp.ui.fragment.RequestSupportFragment"
+        android:label="RequestSupportFragment" >
+    </fragment>
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.example.masapp.ui.fragment.ProductFragment"
+        android:label="fragment_product"
+        tools:layout="@layout/fragment_preview_product" >
+        <action
+            android:id="@+id/action_productFragment_to_requestSupportFragment"
+            app:destination="@id/requestSupportFragment" />
+    </fragment>
+</navigation>
