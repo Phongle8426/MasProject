@@ -26,7 +26,7 @@ class AddNewMemberFragment : Fragment() {
     private lateinit var binding: FragmentAddNewMemberBinding
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var viewModel : CivilianViewModel
-    private var uId: Int = 0
+    private var uId: Long = 0
     private var uToken = ""
     private val vaccines = listOf(
         "AstraZeneca", "Gam-COVID-Vac", "Vero Cell", "Spikevax (Moderna)", "Comirnaty (Pfizer/BioNTech)", "Janssen","Abdala")
@@ -83,7 +83,7 @@ class AddNewMemberFragment : Fragment() {
     }
 
     private fun getUId(){
-        uId = sharedPreferences.getInt(LoginActivity.USER_ID,0)
+        uId = sharedPreferences.getLong(LoginActivity.USER_ID,0)
         uToken = sharedPreferences.getString(LoginActivity.USER_TOKEN,"1")!!
 
         Log.d("lala", "$uId / $uToken")
@@ -114,7 +114,7 @@ class AddNewMemberFragment : Fragment() {
             listVaccine.add(VaccineModel(0,day2,nameVaccine2))
         Log.d("list vaccine", listVaccine.toString())
         if (checkNotNull(name, phone)){
-            val civilian = CivilianModel(name,birthDay,sex,phone,idCard,uId.toLong(),listVaccine.size.toString(),listVaccine)
+            val civilian = CivilianModel(name,birthDay,sex,phone,idCard,uId,listVaccine.size.toString(),listVaccine)
             viewModel.saveFamily(civilian,uToken)
         }else{
             Toast.makeText(context,"Thông tin chưa đầy đủ", Toast.LENGTH_SHORT).show()

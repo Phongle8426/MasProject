@@ -18,7 +18,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModelProfile: ProfileViewModel
     private lateinit var sharedPreferences: SharedPreferences
-    private var uId: Int = 0
+    private var uId: Long = 0
     private var uToken = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,15 +42,14 @@ class HomeFragment : Fragment() {
         viewModelProfile.getProfile(uId,uToken)
         viewModelProfile.profile.observe(requireActivity(), androidx.lifecycle.Observer {
             if(it != null){
-                binding.tvUserName.setText(it.name)
+                binding.tvUserName.text = it.name
             }
         })
 
     }
 
     private fun getUId(){
-        uId = sharedPreferences.getInt(LoginActivity.USER_ID,0)
+        uId = sharedPreferences.getLong(LoginActivity.USER_ID,0)
         uToken = sharedPreferences.getString(LoginActivity.USER_TOKEN,"1")!!
     }
-
 }

@@ -15,7 +15,7 @@ import retrofit2.Response
 class CivilianViewModel: ViewModel() {
     val civilians = MutableLiveData<List<CivilianModel>>()
     val notify = MutableLiveData<String>()
-    fun getFamily(id: Int, author: String){
+    fun getFamily(id: Long, author: String){
        val call = massApi().civilianService.getFamily(id,"Bearer  $author")
         call.enqueue(object: Callback<List<CivilianModel>> {
             override fun onResponse(

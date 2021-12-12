@@ -26,13 +26,14 @@ import com.example.masapp.ui.activity.LoginActivity
 import com.example.masapp.utils.ItemClick
 import com.example.masapp.viewmodels.CartViewModel
 import com.example.masapp.viewmodels.ProfileViewModel
+import com.example.masapp.viewmodels.UserViewModel
 
 class RequestSupportFragment : Fragment() {
     private lateinit var binding: FragmentRequestSupportBinding
     private lateinit var viewModel : CartViewModel
     private lateinit var viewModelProfile: ProfileViewModel
     private lateinit var sharedPreferences: SharedPreferences
-    private var uId: Int = 0
+    private var uId: Long = 0
     private var uToken = ""
     private lateinit var totalPrice: String
     private  var quantityProduct: String =""
@@ -50,7 +51,7 @@ class RequestSupportFragment : Fragment() {
         viewModelProfile = ViewModelProvider(requireActivity()).get(ProfileViewModel::class.java)
         getUId()
 
-        viewModel.carts.observe(requireActivity(), Observer {
+        viewModel.carts.observe(requireActivity(), {
             Log.d("requestSupportProduct", it.toString())
             binding.rcvProduct.adapter = ProductAdapter(it,callback)
             binding.rcvProduct.layoutManager = LinearLayoutManager(context)
@@ -65,7 +66,9 @@ class RequestSupportFragment : Fragment() {
         })
 
         viewModel.responseMess.observe(requireActivity(),{
-            Toast.makeText(context,it,Toast.LENGTH_SHORT).show()
+            if(it!=null)
+                Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
+            else Toast.makeText(requireContext(),"không có phản hồi",Toast.LENGTH_SHORT).show()
         })
 
         binding.btnRequest.setOnClickListener {
@@ -86,7 +89,7 @@ class RequestSupportFragment : Fragment() {
     }
 
     private fun getUId(){
-        uId = sharedPreferences.getInt(LoginActivity.USER_ID,0)
+        uId = sharedPreferences.getLong(LoginActivity.USER_ID,0)
         uToken = sharedPreferences.getString(LoginActivity.USER_TOKEN,"1")!!
     }
 
@@ -99,7 +102,7 @@ class RequestSupportFragment : Fragment() {
             var groupNumber: Long = 0
 
             viewModelProfile.getProfile(uId,uToken)
-            viewModelProfile.profile.observe(requireActivity(), androidx.lifecycle.Observer {
+            viewModelProfile.profile.observe(requireActivity(), {
                 if(it != null){
                     name = it.name
                     phone = it.phone
@@ -109,7 +112,7 @@ class RequestSupportFragment : Fragment() {
                 }
             })
 
-            val cart = RequestCartModel(uId,name,totalPrice,quantityProduct.toInt(),phone,wardName,district,groupNumber,listProduct)
+            val cart = RequestCartModel(0,uId,name,totalPrice,quantityProduct.toInt(),phone,wardName,district,groupNumber,listProduct,0,"")
             viewModel.saveCart(cart,uToken)
         }else{
             Toast.makeText(context,"Bạn chưa chọn sản phẩm!", Toast.LENGTH_SHORT).show()

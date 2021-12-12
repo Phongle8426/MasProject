@@ -10,7 +10,7 @@ import retrofit2.http.*
 interface ICivilianService {
     @GET("civilians/{id}")
     fun getFamily(
-        @Path("id") id: Int,
+        @Path("id") id: Long,
         @Header("Authorization") authorization: String
     ): Call<List<CivilianModel>>
 

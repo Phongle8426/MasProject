@@ -12,7 +12,7 @@ class UserRespones(
     val token: String,
     @SerializedName("id")
     @Expose
-    val id: Int,
+    val id: Long,
     @SerializedName("userName")
     @Expose
     val userName: String,

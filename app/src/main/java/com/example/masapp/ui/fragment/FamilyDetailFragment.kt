@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.masapp.R
 import com.example.masapp.databinding.FragmentFamilyDetailBinding
 import com.example.masapp.models.CivilianModel
@@ -52,6 +53,9 @@ class FamilyDetailFragment : Fragment() {
             }
         }
 
+        binding.btnBack.setOnClickListener {
+            this.findNavController().popBackStack()
+        }
         return binding.root
     }
 

@@ -19,7 +19,6 @@ import retrofit2.Response
 /// Created by pc on 11/07/2021.
 ///
 */class UserViewModel: ViewModel() {
-
     val userRespones = MutableLiveData<UserRespones>()
     val messageLoginFailure = MutableLiveData<String>()
     fun getUser(user: User){

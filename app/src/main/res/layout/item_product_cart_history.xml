@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="cartHistory"
+            type="com.example.masapp.models.RequestProductModel" />
+    </data>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cartCLickEvent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardElevation="5dp"
+            card_view:cardUseCompatPadding="true"
+            android:foreground="?attr/selectableItemBackground"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:weightSum="4"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tvName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@{cartHistory.name}"
+                            android:textSize="18sp"
+                            android:textColor="@color/colorText"
+                            android:fontFamily="@font/actor"
+                            android:textStyle="bold"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/tvPrice"
+                                android:layout_width="130dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_gravity="start"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="@{cartHistory.price}"
+                                android:textColor="@color/colorText"
+                                android:fontFamily="@font/actor"
+                                android:textSize="16dp" />
+                            <TextView
+                                android:id="@+id/tvTotalQuantity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_gravity="start"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="@{`Số lượng: x` + cartHistory.quantity}"
+                                android:textColor="@color/colorText"
+                                android:fontFamily="@font/actor"
+                                android:textSize="16dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                   <TextView
+                       android:id="@+id/tvTotalPrice"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/colorText"
+                       android:text="@{cartHistory.totalPrice}"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>

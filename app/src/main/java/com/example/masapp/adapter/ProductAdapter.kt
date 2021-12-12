@@ -22,7 +22,6 @@ import com.example.masapp.utils.ItemClick
 */class ProductAdapter(private val products: List<RequestProductModel>, val listener: ItemClick ): RecyclerView.Adapter<ProductAdapter.ViewHolder>()  {
     inner class ViewHolder(val binding: ItemProductBinding):
     RecyclerView.ViewHolder(binding.root){
-        var quantity = 0
         @SuppressLint("SetTextI18n")
         fun bind(product: RequestProductModel){
             binding.tvPick.text = product.quantity.toString()

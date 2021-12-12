@@ -7,7 +7,8 @@ package com.example.masapp.models
 ///
 */
 data class RequestCartModel(
-    val userId: Int,
+    val id: Long? = null,
+    val userId: Long,
     val ownerName: String,
     val totalPrice: String,
     val quantityProduct: Int,
@@ -15,6 +16,8 @@ data class RequestCartModel(
     val wardName: String,
     val district: String,
     val groupNumber: Long,
-    val listProduct: List<RequestProductModel>
+    val listProduct: List<RequestProductModel>,
+    val status: Int,
+    val createdDate: String
 
 )

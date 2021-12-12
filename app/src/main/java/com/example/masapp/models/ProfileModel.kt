@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName
 */class ProfileModel(
     @SerializedName("id")
     @Expose
-    val id: Int,
+    val id: Long,
     @SerializedName("name")
     @Expose
     val name: String,
@@ -33,14 +33,8 @@ import com.google.gson.annotations.SerializedName
     @SerializedName("address")
     @Expose
     val address: String,
-//    val familyName: String,
-//    val userName: String,
-//    val passWord: String,
-//    val age: String,
-//    val gender: String,
-//    val birthDay: String,
-//    val roles: List<RoleModel>,
-//    val civilians: List<CivilianModel>,
-//    val cartList: List<CartModel>,
-//    val vaccineList: List<VaccineModel>,
-)
+){
+    override fun toString(): String {
+        return "ProfileModel(id=$id, name='$name', phone='$phone', email='$email', district='$district', wardName='$wardName', groupNumber='$groupNumber', address='$address')"
+    }
+}

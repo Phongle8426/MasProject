@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp">
             <ImageView
-                android:id="@+id/back_service_rules"
+                android:id="@+id/btnBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow_back"/>
@@ -53,6 +53,14 @@
             android:layout_height="match_parent"
             android:background="@drawable/login_gb"/>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iconLoading"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/loading"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabButton"

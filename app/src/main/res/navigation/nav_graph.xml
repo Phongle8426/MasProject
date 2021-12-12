@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_personalFragment_to_familyFragment"
             app:destination="@id/familyFragment" />
+        <action
+            android:id="@+id/action_personalFragment_to_oderHistoryFragment"
+            app:destination="@id/oderHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment2"
@@ -67,4 +70,16 @@
             android:id="@+id/action_productFragment_to_requestSupportFragment"
             app:destination="@id/requestSupportFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/oderHistoryFragment"
+        android:name="com.example.masapp.ui.fragment.OderHistoryFragment"
+        android:label="OderHistoryFragment" >
+        <action
+            android:id="@+id/action_oderHistoryFragment_to_detailHistoryFragment"
+            app:destination="@id/detailHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailHistoryFragment"
+        android:name="com.example.masapp.ui.fragment.DetailHistoryFragment"
+        android:label="DetailHistoryFragment" />
 </navigation>
