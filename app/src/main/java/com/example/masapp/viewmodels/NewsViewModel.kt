@@ -13,12 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.net.SocketTimeoutException
 
-/*
-///
-/// Project: MasApp
-/// Created by pc on 12/19/2021.
-///
-*/class NewsViewModel: ViewModel() {
+class NewsViewModel: ViewModel() {
     val listNews = MutableLiveData<List<NewsModel>>()
     val messListNews = MutableLiveData<String>()
     fun getNews(address: AddressModel, author: String){

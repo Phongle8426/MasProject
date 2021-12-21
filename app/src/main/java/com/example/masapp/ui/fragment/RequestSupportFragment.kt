@@ -69,11 +69,11 @@ class RequestSupportFragment : Fragment() {
             totalPrice = it
         })
 
-        viewModel.messageSaveCart.observe(requireActivity(),{
-            it?.let{
-                Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
-            }
-        })
+//        viewModel.messageSaveCart.observe(requireActivity(),{
+//            it?.let{
+//                Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
+//            }
+//        })
 
         binding.btnRequest.setOnClickListener {
             showDialogConfirm()
@@ -104,9 +104,10 @@ class RequestSupportFragment : Fragment() {
 
     private fun showDialogConfirm(){
         DialogConfirm.getInstanceDialog()
-            .setMessage("Đặt mua những món trong danh sách này?"). apply {
+            .setMessage("Mỗi ngày sẽ chỉ đặt mua 1 lần.\n Đặt mua những món trong danh sách này?"). apply {
                 onAccept = {
                     requestProduct()
+                    Toast.makeText(requireContext(),"Đặt hàng thành công!",Toast.LENGTH_SHORT).show()
                 }
             }.show(parentFragmentManager, "RequestSupportFragment")
     }

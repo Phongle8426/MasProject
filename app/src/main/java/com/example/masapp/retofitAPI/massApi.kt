@@ -17,7 +17,7 @@ class massApi {
         fun getData(): Retrofit {
             return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
-                .baseUrl("http://192.168.0.23:8080/api/v1/")
+                .baseUrl("http://192.168.0.5:8080/api/v1/")
                 .client(okHttpClient)
                 .build()
         }
