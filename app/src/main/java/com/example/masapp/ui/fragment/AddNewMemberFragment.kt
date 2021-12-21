@@ -88,13 +88,16 @@ class AddNewMemberFragment : Fragment() {
             DialogConfirm.getInstanceDialog()
                 .setMessage("Bạn muốn thêm người này vào thành viên gia đình ?")
                 .apply {
-                    onAccept = {saveMember()}
+                    onAccept = {
+                        saveMember()
+                        Toast.makeText(requireContext(),"Thêm thành công",Toast.LENGTH_SHORT).show()
+                    }
                 }.show(parentFragmentManager,"save")
         }
 
-        viewModel.messSaveFamily.observe(requireActivity(),{
-            it?.let{ Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show() }
-        })
+//        viewModel.messSaveFamily.observe(requireActivity(),{
+//            it?.let{  }
+//        })
 
         binding.btnBack.setOnClickListener {
             this.findNavController().popBackStack()

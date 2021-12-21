@@ -49,7 +49,7 @@ class familyFragment : Fragment() {
         viewModel.civilians.observe(requireActivity(), androidx.lifecycle.Observer {
             lifecycleScope.launch {
                 it?.let {
-                    delay(500)
+                    delay(800)
                     binding.rcvFamilyMember.layoutManager = LinearLayoutManager(context)
                     binding.rcvFamilyMember.adapter = FamilyAdapter(it,callback)
                     if (it.isEmpty())

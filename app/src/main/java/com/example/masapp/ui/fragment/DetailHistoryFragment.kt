@@ -51,10 +51,30 @@ class DetailHistoryFragment : Fragment() {
             binding.rcvDetailHistoryCart.adapter = DetailCartHistoryAdapter(it.listProduct)
             binding.detailOrder = it
             when(it.status){
-                0 -> binding.imgInprogress.setImageResource(R.drawable.ic_wait)
-                1 -> binding.imgDone.setImageResource(R.drawable.ic_ok)
-                2 -> binding.imgCancel.setImageResource(R.drawable.ic_cancel)
-                3 -> binding.imgPicked.setImageResource(R.drawable.ic_picked)
+                0 -> {
+                    binding.imgDone.setImageResource(R.drawable.ic_ok_dis)
+                    binding.imgCancel.setImageResource(R.drawable.ic_cancel_dis)
+                    binding.imgPicked.setImageResource(R.drawable.ic_picked_dis)
+                    binding.imgInprogress.setImageResource(R.drawable.ic_wait)
+                }
+                1 -> {
+                    binding.imgInprogress.setImageResource(R.drawable.ic_wait_dis)
+                    binding.imgCancel.setImageResource(R.drawable.ic_cancel_dis)
+                    binding.imgPicked.setImageResource(R.drawable.ic_picked_dis)
+                    binding.imgDone.setImageResource(R.drawable.ic_ok)
+                }
+                2 -> {
+                    binding.imgInprogress.setImageResource(R.drawable.ic_wait_dis)
+                    binding.imgDone.setImageResource(R.drawable.ic_ok_dis)
+                    binding.imgPicked.setImageResource(R.drawable.ic_picked_dis)
+                    binding.imgCancel.setImageResource(R.drawable.ic_cancel)
+                }
+                3 -> {
+                    binding.imgInprogress.setImageResource(R.drawable.ic_wait_dis)
+                    binding.imgDone.setImageResource(R.drawable.ic_ok_dis)
+                    binding.imgCancel.setImageResource(R.drawable.ic_cancel_dis)
+                    binding.imgPicked.setImageResource(R.drawable.ic_picked)
+                }
             }
         })
 
