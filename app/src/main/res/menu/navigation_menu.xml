@@ -3,10 +3,10 @@
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="trang chu"/>
+        android:title="Trang chủ"/>
 
     <item
         android:id="@+id/personalFragment"
         android:icon="@drawable/ic_baseline_person_24"
-        android:title="Ca nhan"/>
+        android:title="Cá nhân"/>
 </menu>

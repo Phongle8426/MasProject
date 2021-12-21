@@ -168,7 +168,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="Đà Nẵng"
-                        android:inputType="none"/>
+                        android:inputType="none"
+                        android:enabled="false"/>
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -185,7 +186,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:inputType="none"/>
+                        android:inputType="none"
+                        android:enabled="false"/>
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -202,7 +204,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:inputType="none"/>
+                        android:inputType="none"
+                        android:enabled="false"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -220,7 +223,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="number"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:enabled="false"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -233,11 +237,16 @@
                     android:hint="Địa chỉ"
                     app:startIconDrawable="@drawable/ic_baseline_location_city_24">
 
-                    <AutoCompleteTextView
-                        android:id="@+id/autoCompleteAddress"
-                        android:layout_width="match_parent"
+                    <EditText
+                        android:id="@+id/edtAddress"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"/>
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="3dp"
+                        android:textColorHint="@color/half_black"
+                        android:maxLines="1"
+                        android:inputType="text"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorText"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button

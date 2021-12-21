@@ -55,6 +55,14 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/imgEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_empty"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <ImageView
         android:id="@+id/iconLoading"
         android:layout_width="70dp"
         android:layout_height="70dp"

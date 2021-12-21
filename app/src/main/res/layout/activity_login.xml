@@ -75,6 +75,24 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:text="Nhớ mật khẩu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="@color/design_default_color_secondary"
+                    android:text="Quên mật khẩu?"/>
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/tvError"
                 android:layout_width="wrap_content"
@@ -91,7 +109,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/button_bg"
-                android:text="Continue"
+                android:text="Đăng nhập"
                 android:textAllCaps="false"
                 android:textSize="18sp" />
 

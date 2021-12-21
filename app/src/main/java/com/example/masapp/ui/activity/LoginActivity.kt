@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -27,7 +28,6 @@ class LoginActivity : AppCompatActivity() {
         const val sharedPrefFile = "saveTokenSharedPre"
         val USER_TOKEN = "USER_TOKEN"
         val USER_ID = "USER_ID"
-
     }
 
     private lateinit var binding: ActivityLoginBinding
@@ -72,11 +72,13 @@ class LoginActivity : AppCompatActivity() {
             }
         })
         viewModel.messageLoginFailure.observe(this, Observer {
-            binding.tvError.apply {
-                this.visibility = View.VISIBLE
-                this.text = it
+            it?.let{
+                Toast.makeText(applicationContext, it, Toast.LENGTH_LONG).show()
+                binding.iconLoading.apply {
+                    clearAnimation()
+                    visibility = View.GONE
+                }
             }
-            animationLoading.cancel()
         })
     }
 

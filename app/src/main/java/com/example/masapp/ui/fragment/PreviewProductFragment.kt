@@ -52,13 +52,23 @@ class ProductFragment : Fragment() {
         if(viewModel.carts.value!= null)
             listRequestProduct = viewModel.carts.value as MutableList<RequestProductModel>
         viewModel.getProduct(district,ward,uToken)
+        binding.iconLoading.apply {
+            visibility = View.VISIBLE
+            startAnimation(animationLoading)
+        }
         viewModel.products.observe(requireActivity(),{
-            Log.d("list product", "onCreateView: $it")
+            Log.d("Hung12", "onCreateView: ${listRequestProduct.size}")
             binding.rcvProduct.adapter = PreviewProductAdapter(it,listRequestProduct,callback)
             binding.rcvProduct.layoutManager = LinearLayoutManager(context)
+            if (it.isEmpty())
+                binding.imgEmpty.visibility = View.VISIBLE
+            binding.iconLoading.apply {
+                clearAnimation()
+                visibility = View.GONE
+            }
         })
         binding.btnOrder.setOnClickListener {
-            Log.e("huhu", "oder: ${listRequestProduct.size}", )
+            Log.e("huhu", "oder: ${listRequestProduct.size}" )
             if(listRequestProduct.size > 0){
                 viewModel.addProduct(listRequestProduct)
                 ProductFragmentDirections.actionProductFragmentToRequestSupportFragment().apply {
@@ -78,11 +88,14 @@ class ProductFragment : Fragment() {
         override fun itemClick(model: Any) {
             val product = model as ProductModel
             var isExists = false
+            Log.e("Sang", "itemClick: ${product.id}" )
             for(it in listRequestProduct){
                 if(product.id == it.productId){
+                    Log.e("Sang1", "itemClick: ${it.productId}" )
                     listRequestProduct.remove(it)
                     isExists = true
-                    Log.e("huhu", "remove: ${listRequestProduct.size}", )
+                    Log.e("Hung13", "remove: ${listRequestProduct.size}", )
+                    break
                 }
             }
             if (!isExists){
@@ -90,8 +103,11 @@ class ProductFragment : Fragment() {
                 val price = product.price
                 val productId = product.id
                 listRequestProduct.add(RequestProductModel(name,1,price,"",productId))
-                Log.e("huhu", "add: ${listRequestProduct.size}", )
+                Log.e("Hung14", "add: ${listRequestProduct.size}", )
             }
+        }
+
+        override fun itemClickWithCount(model: Any, countProduct: Int) {
         }
     }
 

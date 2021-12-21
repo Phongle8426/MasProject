@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.masapp.databinding.ItemFamilyBinding
 import com.example.masapp.models.CivilianModel
 import com.example.masapp.utils.ItemClick
+import com.example.masapp.viewmodels.CivilianViewModel
 
-class FamilyAdapter(private val members: List<CivilianModel>, val listener: ItemClick): RecyclerView.Adapter<FamilyAdapter.ViewHolder>() {
+class FamilyAdapter(private val members: List<CivilianModel>, val listener: ItemClick) :
+    RecyclerView.Adapter<FamilyAdapter.ViewHolder>() {
     inner class ViewHolder(val binding: ItemFamilyBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(member: CivilianModel) {

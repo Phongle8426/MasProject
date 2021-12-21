@@ -31,28 +31,28 @@ class ProfileFragment : Fragment() {
     private lateinit var viewModel: AddressViewModel
     private lateinit var viewModelProfile: ProfileViewModel
     private lateinit var animationLoading: Animation
-    private val districtsName = listOf(
-        "Hải Châu",
-        "Cẩm Lệ",
-        "Thanh Khê",
-        "Liên Chiểu",
-        "Ngũ Hành Sơn",
-        "Sơn Trà",
-        "Huyện Hòa Vang"
-    )
-    private val mapDistrict: HashMap<String, Int> = hashMapOf(
-        "Hải Châu" to 1,
-        "Cẩm Lệ" to 2,
-        "Thanh Khê" to 3,
-        "Liên Chiểu" to 4,
-        "Ngũ Hành Sơn" to 5,
-        "Sơn Trà" to 6,
-        "Huyện Hòa Vang" to 7
-    )
+//    private val districtsName = listOf(
+//        "Hải Châu",
+//        "Cẩm Lệ",
+//        "Thanh Khê",
+//        "Liên Chiểu",
+//        "Ngũ Hành Sơn",
+//        "Sơn Trà",
+//        "Huyện Hòa Vang"
+//    )
+//    private val mapDistrict: HashMap<String, Int> = hashMapOf(
+//        "Hải Châu" to 1,
+//        "Cẩm Lệ" to 2,
+//        "Thanh Khê" to 3,
+//        "Liên Chiểu" to 4,
+//        "Ngũ Hành Sơn" to 5,
+//        "Sơn Trà" to 6,
+//        "Huyện Hòa Vang" to 7
+//    )
     private lateinit var sharedPreferences: SharedPreferences
     private var uId: Long = 0
     private var uToken = ""
-    private var listWard = mutableListOf<String>()
+//    private var listWard = mutableListOf<String>()
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -69,22 +69,24 @@ class ProfileFragment : Fragment() {
         )
         getUId()
         getProfile()
-        binding.autoCompleteDistrict.setOnClickListener {
-            val arrayAdapterDistrict = ArrayAdapter(requireContext(), R.layout.simple_dropdown_item_1line, districtsName)
-            binding.autoCompleteDistrict.setAdapter(arrayAdapterDistrict)
-        }
-        binding.autoCompleteWard.setOnClickListener {
-            getWard()
-        }
+//        binding.autoCompleteDistrict.setOnClickListener {
+//            val arrayAdapterDistrict = ArrayAdapter(requireContext(), R.layout.simple_dropdown_item_1line, districtsName)
+//            binding.autoCompleteDistrict.setAdapter(arrayAdapterDistrict)
+//        }
+//        binding.autoCompleteWard.setOnClickListener {
+//            getWard()
+//        }
         binding.btnUpdate.setOnClickListener {
             getInfo()
         }
 
         viewModelProfile.responseMess.observe(requireActivity(), {
-            if (it != null) {
+            it?.let{
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                animationLoading.cancel()
-                binding.iconLoading.visibility = View.GONE
+                binding.iconLoading.apply {
+                    clearAnimation()
+                    visibility = View.GONE
+                }
             }
         })
         binding.btnBack.setOnClickListener {
@@ -93,28 +95,28 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    private fun getWard() {
-        val currentDistrict = binding.autoCompleteDistrict.text.toString()
-        Log.e("huhu11", currentDistrict)
-        if (currentDistrict != "") {
-            val id = mapDistrict[currentDistrict]
-            Log.e("idd", id.toString())
-            viewModel.getWard(id!!)
-            viewModel.wardRespones.observe(requireActivity(), {
-                Log.e("huhu", it.toString())
-                listWard.clear()
-                for (district in it) {
-                    listWard.add(district.name)
-                }
-                val arrayAdapterWard =
-                    ArrayAdapter(requireActivity(), R.layout.simple_dropdown_item_1line, listWard)
-                binding.autoCompleteWard.setAdapter(arrayAdapterWard)
-                binding.autoCompleteWard.showDropDown()
-            })
-        } else {
-            Toast.makeText(context, "Hãy chọn Quận của bạn", Toast.LENGTH_SHORT).show()
-        }
-    }
+//    private fun getWard() {
+//        val currentDistrict = binding.autoCompleteDistrict.text.toString()
+//        Log.e("huhu11", currentDistrict)
+//        if (currentDistrict != "") {
+//            val id = mapDistrict[currentDistrict]
+//            Log.e("idd", id.toString())
+//            viewModel.getWard(id!!)
+//            viewModel.wardRespones.observe(requireActivity(), {
+//                Log.e("huhu", it.toString())
+//                listWard.clear()
+//                for (district in it) {
+//                    listWard.add(district.name)
+//                }
+//                val arrayAdapterWard =
+//                    ArrayAdapter(requireActivity(), R.layout.simple_dropdown_item_1line, listWard)
+//                binding.autoCompleteWard.setAdapter(arrayAdapterWard)
+//                binding.autoCompleteWard.showDropDown()
+//            })
+//        } else {
+//            Toast.makeText(context, "Hãy chọn Quận của bạn", Toast.LENGTH_SHORT).show()
+//        }
+//    }
 
     private fun getInfo() {
         val name = binding.edtName.text.toString()
@@ -123,7 +125,7 @@ class ProfileFragment : Fragment() {
         val district = binding.autoCompleteDistrict.text.toString()
         val ward = binding.autoCompleteWard.text.toString()
         val group = binding.autoCompleteGroup.text.toString()
-        val address = binding.autoCompleteAddress.text.toString()
+        val address = binding.edtAddress.text.toString()
         if(name.isBlank()|| phone.isBlank() || email.isBlank() || district.isBlank()
             || ward.isBlank()|| group.isBlank()|| address.isBlank()){
             Toast.makeText(context,"Hãy nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show()
@@ -149,10 +151,9 @@ class ProfileFragment : Fragment() {
                 binding.autoCompleteDistrict.setText(it.district)
                 binding.autoCompleteWard.setText(it.wardName)
                 binding.autoCompleteGroup.setText(it.groupNumber)
-                binding.autoCompleteAddress.setText(it.address)
+                binding.edtAddress.setText(it.address)
             }
         })
-
     }
 
     private fun getUId() {

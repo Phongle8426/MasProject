@@ -45,7 +45,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="Đơn hàng ngày 21/11/2021"
+                            android:text="@{`Đơn hàng ngày `+ cartHistory.convertTime()}"
                             android:textSize="18sp"
                             android:textColor="@color/colorText"
                             android:fontFamily="@font/actor"
@@ -61,7 +61,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_gravity="start"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="200,000đ"
+                                android:text="@{cartHistory.convertCurrency()}"
                                 android:textColor="@color/colorText"
                                 android:fontFamily="@font/actor"
                                 android:textSize="16dp" />
@@ -72,7 +72,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_gravity="start"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="Số lượng: x5"
+                                android:text="@{`Số lượng: x` + cartHistory.quantityProduct}"
                                 android:textColor="@color/colorText"
                                 android:fontFamily="@font/actor"
                                 android:textSize="16dp" />

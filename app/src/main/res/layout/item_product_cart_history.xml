@@ -60,7 +60,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_gravity="start"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="@{cartHistory.price}"
+                                android:text="@{cartHistory.convertCurrency(cartHistory.price)}"
                                 android:textColor="@color/colorText"
                                 android:fontFamily="@font/actor"
                                 android:textSize="16dp" />

@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/setting_frame"
-    android:background="@color/background"
-    android:orientation="vertical"
-    tools:context=".ui.fragment.ProductFragment">
-    <Toolbar
+    android:layout_height="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp">
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_back"/>
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:id="@+id/setting_frame"
+        android:background="@color/background"
+        android:orientation="vertical"
+        tools:context=".ui.fragment.ProductFragment">
+        <Toolbar
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="45dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-            <TextView
+            android:layout_height="30dp">
+            <ImageView
+                android:id="@+id/btnBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_back"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="45dp"
                 android:gravity="center_horizontal"
-                android:text="Danh sách sản phẩm"
-                android:textColor="@color/white"
-                android:textSize="23sp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-    </Toolbar>
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Danh sách sản phẩm"
+                    android:textColor="@color/white"
+                    android:textSize="23sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </Toolbar>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -40,20 +43,20 @@
             android:background="@drawable/login_gb"
             android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorText"
-                    android:text="Thức ăn"
-                    android:fontFamily="@font/actor"
-                    android:textSize="15sp"
-                    android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorText"
+                android:text="Thức ăn"
+                android:fontFamily="@font/actor"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcvProduct"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvProduct"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
             <Button
                 android:id="@+id/btnOrder"
                 android:layout_width="wrap_content"
@@ -61,5 +64,21 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="50dp"
                 android:text="Đặt hàng"/>
-            </LinearLayout>
-</LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/imgEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_empty"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/iconLoading"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/loading"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

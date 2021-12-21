@@ -34,12 +34,8 @@ import com.example.masapp.utils.ItemClick
                     binding.ckbSelectProduct.isChecked = true
             }
             binding.cardMyevent.setOnClickListener {
-                if (!binding.ckbSelectProduct.isChecked) {
-                    listener.itemClick(product)
-                    binding.ckbSelectProduct.isChecked = true
-                } else {
-                    binding.ckbSelectProduct.isChecked = false
-                }
+                listener.itemClick(product)
+                binding.ckbSelectProduct.isChecked = !binding.ckbSelectProduct.isChecked
             }
         }
     }

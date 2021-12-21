@@ -14,25 +14,28 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.masapp.R
-import com.example.masapp.adapter.FamilyAdapter
 import com.example.masapp.adapter.ProductAdapter
 import com.example.masapp.databinding.FragmentRequestSupportBinding
-import com.example.masapp.models.CategoryModel
-import com.example.masapp.models.ProductModel
 import com.example.masapp.models.RequestCartModel
 import com.example.masapp.models.RequestProductModel
 import com.example.masapp.ui.activity.LoginActivity
+import com.example.masapp.utils.CurrencyConvert
+import com.example.masapp.utils.DialogConfirm
 import com.example.masapp.utils.ItemClick
 import com.example.masapp.viewmodels.CartViewModel
 import com.example.masapp.viewmodels.ProfileViewModel
-import com.example.masapp.viewmodels.UserViewModel
+import java.util.*
 
 class RequestSupportFragment : Fragment() {
+    companion object{
+        const val DATE_REQUEST = "day_request"
+        const val DATE = "today"
+    }
     private lateinit var binding: FragmentRequestSupportBinding
     private lateinit var viewModel : CartViewModel
     private lateinit var viewModelProfile: ProfileViewModel
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var sharedPrfsDateRequest: SharedPreferences
     private var uId: Long = 0
     private var uToken = ""
     private lateinit var totalPrice: String
@@ -47,13 +50,14 @@ class RequestSupportFragment : Fragment() {
         binding = FragmentRequestSupportBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
         sharedPreferences = requireContext().getSharedPreferences(LoginActivity.sharedPrefFile, Context.MODE_PRIVATE)
+        sharedPrfsDateRequest = requireContext().getSharedPreferences(DATE_REQUEST, Context.MODE_PRIVATE)
         viewModel = ViewModelProvider(requireActivity()).get(CartViewModel::class.java)
         viewModelProfile = ViewModelProvider(requireActivity()).get(ProfileViewModel::class.java)
+        checkDateRequest()
         getUId()
-
         viewModel.carts.observe(requireActivity(), {
             Log.d("requestSupportProduct", it.toString())
-            binding.rcvProduct.adapter = ProductAdapter(it,callback)
+            binding.rcvProduct.adapter = ProductAdapter(it,viewModel,callback)
             binding.rcvProduct.layoutManager = LinearLayoutManager(context)
             calculatePrice(it)
             quantityProduct = it.size.toString()
@@ -61,18 +65,18 @@ class RequestSupportFragment : Fragment() {
         })
         viewModel.calculatePrice()
         viewModel.totalPrice.observe(requireActivity(), Observer {
-            binding.tvTotal.text = "$it đ"
+            binding.tvTotal.text = CurrencyConvert().convertCurrency(it)
             totalPrice = it
         })
 
-        viewModel.responseMess.observe(requireActivity(),{
-            if(it!=null)
+        viewModel.messageSaveCart.observe(requireActivity(),{
+            it?.let{
                 Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
-            else Toast.makeText(requireContext(),"không có phản hồi",Toast.LENGTH_SHORT).show()
+            }
         })
 
         binding.btnRequest.setOnClickListener {
-            requestProduct()
+            showDialogConfirm()
         }
 
         binding.btnBack.setOnClickListener {
@@ -80,7 +84,6 @@ class RequestSupportFragment : Fragment() {
         }
         return binding.root
     }
-
 
     fun calculatePrice(listProduct: List<RequestProductModel>){
         for (it in listProduct){
@@ -91,6 +94,21 @@ class RequestSupportFragment : Fragment() {
     private fun getUId(){
         uId = sharedPreferences.getLong(LoginActivity.USER_ID,0)
         uToken = sharedPreferences.getString(LoginActivity.USER_TOKEN,"1")!!
+    }
+    private fun checkDateRequest(){
+        val requestDate = sharedPrfsDateRequest.getString(DATE,"")
+        if(requestDate == getCurrentDay() && requestDate != ""){
+            binding.btnRequest.isEnabled = false
+        }
+    }
+
+    private fun showDialogConfirm(){
+        DialogConfirm.getInstanceDialog()
+            .setMessage("Đặt mua những món trong danh sách này?"). apply {
+                onAccept = {
+                    requestProduct()
+                }
+            }.show(parentFragmentManager, "RequestSupportFragment")
     }
 
     private fun requestProduct(){
@@ -111,17 +129,35 @@ class RequestSupportFragment : Fragment() {
                     groupNumber = it.groupNumber.toLong()
                 }
             })
-
-            val cart = RequestCartModel(0,uId,name,totalPrice,quantityProduct.toInt(),phone,wardName,district,groupNumber,listProduct,0,"")
+            val note = binding.edtNote.text.toString()
+            val cart = RequestCartModel(0,uId,name,totalPrice,quantityProduct.toInt(),phone,wardName,district,groupNumber,listProduct,note,0,"")
             viewModel.saveCart(cart,uToken)
+            saveDateRequestCart()
         }else{
             Toast.makeText(context,"Bạn chưa chọn sản phẩm!", Toast.LENGTH_SHORT).show()
         }
     }
 
+
+
+    fun saveDateRequestCart(){
+        val editor:SharedPreferences.Editor =  sharedPrfsDateRequest.edit()
+        editor.putString(DATE,getCurrentDay())
+        editor.apply()
+        editor.commit()
+    }
+
+    private fun getCurrentDay(): String = Calendar.getInstance().get(Calendar.DAY_OF_MONTH).toString()
+
     private val callback = object: ItemClick {
         override fun itemClick(model: Any) {
-            viewModel.calculatePrice()
+        }
+
+        override fun itemClickWithCount(model: Any, countProduct: Int) {
+            if (countProduct < 5)
+                viewModel.calculatePrice()
+            else
+                Toast.makeText(requireContext(),"Bạn đã đạt số lượng tối đa!", Toast.LENGTH_SHORT).show()
         }
     }
 

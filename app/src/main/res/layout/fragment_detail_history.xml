@@ -52,6 +52,11 @@
              android:padding="15dp"
              android:background="@drawable/login_gb"
              android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -88,7 +93,7 @@
                    android:textSize="18sp"
                    android:textStyle="bold"
                    android:textColor="@color/colorText"
-                   android:text="@{detailOrder.totalPrice}"/>
+                   android:text="@{detailOrder.convertCurrency()}"/>
             </LinearLayout>
          </LinearLayout>
       </LinearLayout>

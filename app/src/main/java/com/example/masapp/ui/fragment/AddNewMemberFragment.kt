@@ -15,10 +15,12 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.masapp.databinding.FragmentAddNewMemberBinding
 import com.example.masapp.models.CivilianModel
 import com.example.masapp.models.VaccineModel
 import com.example.masapp.ui.activity.LoginActivity
+import com.example.masapp.utils.DialogConfirm
 import com.example.masapp.viewmodels.CivilianViewModel
 import java.util.*
 
@@ -28,6 +30,7 @@ class AddNewMemberFragment : Fragment() {
     private lateinit var viewModel : CivilianViewModel
     private var uId: Long = 0
     private var uToken = ""
+    private var sex = ""
     private val vaccines = listOf(
         "AstraZeneca", "Gam-COVID-Vac", "Vero Cell", "Spikevax (Moderna)", "Comirnaty (Pfizer/BioNTech)", "Janssen","Abdala")
 
@@ -40,10 +43,8 @@ class AddNewMemberFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(CivilianViewModel::class.java)
         sharedPreferences = requireContext().getSharedPreferences(LoginActivity.sharedPrefFile, Context.MODE_PRIVATE)
         getUId()
-        viewModel.notify.observe(requireActivity(), androidx.lifecycle.Observer {
-            if (it != null){
-                Toast.makeText(context,it,Toast.LENGTH_SHORT).show()
-            }
+        viewModel.messSaveFamily.observe(requireActivity(), {
+            it?.let{ Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show() }
         })
         binding.edtBirthDay.setOnClickListener {
             val c = Calendar.getInstance()
@@ -51,8 +52,7 @@ class AddNewMemberFragment : Fragment() {
             val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
             val dpd = DatePickerDialog(
-                requireContext(),
-                DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                requireContext(), { _, year, monthOfYear, dayOfMonth ->
                     binding.edtBirthDay.setText("$dayOfMonth/$monthOfYear/$year")
                 },
                 year,
@@ -76,8 +76,28 @@ class AddNewMemberFragment : Fragment() {
             }
         }
 
+        binding.gRadioSex.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId){
+                binding.radioBtnMale.id -> sex = "nam"
+                binding.radioBtnFemale.id -> sex = "nữ"
+                binding.radioBtnNon.id -> sex = "khác"
+            }
+        }
+
         binding.btnSave.setOnClickListener {
-            saveMember()
+            DialogConfirm.getInstanceDialog()
+                .setMessage("Bạn muốn thêm người này vào thành viên gia đình ?")
+                .apply {
+                    onAccept = {saveMember()}
+                }.show(parentFragmentManager,"save")
+        }
+
+        viewModel.messSaveFamily.observe(requireActivity(),{
+            it?.let{ Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show() }
+        })
+
+        binding.btnBack.setOnClickListener {
+            this.findNavController().popBackStack()
         }
         return binding.root
     }
@@ -85,22 +105,12 @@ class AddNewMemberFragment : Fragment() {
     private fun getUId(){
         uId = sharedPreferences.getLong(LoginActivity.USER_ID,0)
         uToken = sharedPreferences.getString(LoginActivity.USER_TOKEN,"1")!!
-
-        Log.d("lala", "$uId / $uToken")
     }
 
     private fun saveMember(){
         val listVaccine = mutableListOf<VaccineModel>()
         val name = binding.edtName.text.toString()
         val birthDay = binding.edtBirthDay.text.toString()
-        var sex = ""
-        binding.gRadioSex.setOnCheckedChangeListener { group, checkedId ->
-            when(checkedId){
-                binding.radioBtnFemale.id -> sex = binding.radioBtnFemale.text.toString()
-                binding.radioBtnMale.id -> sex = binding.radioBtnMale.text.toString()
-                binding.radioBtnNon.id -> sex = binding.radioBtnNon.text.toString()
-            }
-        }
         val phone = binding.edtPhone.text.toString()
         val idCard = binding.edtIdCard.text.toString()
 
@@ -112,10 +122,10 @@ class AddNewMemberFragment : Fragment() {
             listVaccine.add(VaccineModel(0,day1,nameVaccine1))
         if (checkNotNull(day2, nameVaccine2))
             listVaccine.add(VaccineModel(0,day2,nameVaccine2))
-        Log.d("list vaccine", listVaccine.toString())
-        if (checkNotNull(name, phone)){
-            val civilian = CivilianModel(name,birthDay,sex,phone,idCard,uId,listVaccine.size.toString(),listVaccine)
+        if (checkNotNull(name, birthDay)){
+            val civilian = CivilianModel(0,name,birthDay,sex,phone,idCard,uId,listVaccine.size.toString(),listVaccine)
             viewModel.saveFamily(civilian,uToken)
+            Log.d("Hung", "saveMember: $civilian")
         }else{
             Toast.makeText(context,"Thông tin chưa đầy đủ", Toast.LENGTH_SHORT).show()
         }

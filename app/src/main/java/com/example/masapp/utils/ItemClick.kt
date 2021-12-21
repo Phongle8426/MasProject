@@ -8,4 +8,6 @@ package com.example.masapp.utils
 ///
 */interface ItemClick {
     fun itemClick(model: Any)
+    fun itemClickWithCount(model: Any, countProduct: Int)
+
 }

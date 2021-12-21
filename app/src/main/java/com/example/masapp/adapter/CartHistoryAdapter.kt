@@ -11,20 +11,16 @@ import com.example.masapp.models.RequestProductModel
 import com.example.masapp.utils.ItemClick
 import com.example.masapp.viewmodels.CartViewModel
 
-/*
-///
-/// Project: MasApp
-/// Created by pc on 12/05/2021.
-///
-*/class CartHistoryAdapter(private val carts: List<RequestCartModel>, val listener: ItemClick) :
+class CartHistoryAdapter(private val carts: List<RequestCartModel>, val listener: ItemClick) :
     RecyclerView.Adapter<CartHistoryAdapter.ViewHolder>() {
     inner class ViewHolder(val binding: ItemCartHistoryBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(cart: RequestCartModel){
             binding.cartHistory = cart
             when(cart.status){
-                0 -> binding.imgStatus.setImageResource(R.drawable.ic_cancel)
-                1 -> binding.imgStatus.setImageResource(R.drawable.ic_wait)
-                2 -> binding.imgStatus.setImageResource(R.drawable.ic_ok)
+                0 -> binding.imgStatus.setImageResource(R.drawable.ic_wait)
+                1 -> binding.imgStatus.setImageResource(R.drawable.ic_ok)
+                2 -> binding.imgStatus.setImageResource(R.drawable.ic_cancel)
+                3 -> binding.imgStatus.setImageResource(R.drawable.ic_picked)
             }
             binding.cartCLickEvent.setOnClickListener {
                 listener.itemClick(cart)

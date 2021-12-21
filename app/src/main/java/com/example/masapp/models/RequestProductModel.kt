@@ -1,15 +1,16 @@
 package com.example.masapp.models
 
-/*
-///
-/// Project: MasApp
-/// Created by pc on 11/27/2021.
-///
-*/
-data class RequestProductModel(
+import java.text.DecimalFormat
+
+class RequestProductModel(
     val name: String,
     var quantity: Int,
     val price: String,
     var totalPrice: String,
     val productId: Long
-)
+){
+    fun convertCurrency(data: String):String{
+        val formatCurrency = DecimalFormat("###,###,###")
+        return "${formatCurrency.format(data.toLong())}đ"
+    }
+}

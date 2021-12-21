@@ -47,6 +47,7 @@ class DetailHistoryFragment : Fragment() {
             viewModel.getCartById(idCart,uToken)
         }
         viewModel.cartDetailHistory.observe(requireActivity(),{
+            Log.d("Sang", "onCreateView: ${it.listProduct}")
             binding.rcvDetailHistoryCart.adapter = DetailCartHistoryAdapter(it.listProduct)
             binding.detailOrder = it
         })

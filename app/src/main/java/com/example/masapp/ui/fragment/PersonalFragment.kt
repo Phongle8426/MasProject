@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.masapp.BottomNavigationActivity
 import com.example.masapp.databinding.FragmentPersonalBinding
 import com.example.masapp.ui.activity.LoginActivity
 import com.example.masapp.viewmodels.ProfileViewModel
@@ -47,6 +48,17 @@ class PersonalFragment : Fragment() {
             }
         }
 
+        binding.cardChangePass.setOnClickListener {
+            PersonalFragmentDirections.actionPersonalFragmentToChangePasswordFragment().apply {
+                findNavController().navigate(this)
+            }
+        }
+        binding.cardLogout.setOnClickListener {
+            Intent(requireContext(), LoginActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivity(this)
+            }
+        }
         return binding.root
     }
 

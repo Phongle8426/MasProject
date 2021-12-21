@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_productFragment"
             app:destination="@id/productFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
     </fragment>
     <fragment
         android:id="@+id/personalFragment"
@@ -28,6 +31,9 @@
         <action
             android:id="@+id/action_personalFragment_to_oderHistoryFragment"
             app:destination="@id/oderHistoryFragment" />
+        <action
+            android:id="@+id/action_personalFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment2"
@@ -82,4 +88,20 @@
         android:id="@+id/detailHistoryFragment"
         android:name="com.example.masapp.ui.fragment.DetailHistoryFragment"
         android:label="DetailHistoryFragment" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.masapp.ui.fragment.ChangePasswordFragment"
+        android:label="ChangePasswordFragment" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.example.masapp.ui.fragment.NewsFragment"
+        android:label="NewsFragment" >
+        <action
+            android:id="@+id/action_newsFragment_to_newsDetailFragment"
+            app:destination="@id/newsDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsDetailFragment"
+        android:name="com.example.masapp.ui.fragment.NewsDetailFragment"
+        android:label="NewsDetailFragment" />
 </navigation>

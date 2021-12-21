@@ -159,6 +159,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"/>
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardChangePass"
                 android:layout_width="match_parent"
                 android:clickable="true"
                 android:foreground="?attr/selectableItemBackground"
@@ -183,6 +184,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardLogout"
                 android:layout_width="match_parent"
                 android:clickable="true"
                 android:foreground="?attr/selectableItemBackground"

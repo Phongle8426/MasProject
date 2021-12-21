@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.masapp.R
@@ -21,6 +23,8 @@ import com.example.masapp.ui.activity.LoginActivity
 import com.example.masapp.utils.ItemClick
 import com.example.masapp.viewmodels.CartViewModel
 import com.example.masapp.viewmodels.ProfileViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class OderHistoryFragment : Fragment() {
     private lateinit var binding: FragmentOderHistoryBinding
@@ -46,13 +50,23 @@ class OderHistoryFragment : Fragment() {
         getUId()
         viewModel.getCartHistory(uId,uToken)
         viewModel.cartsHistory.observe(requireActivity(),{
-            binding.rcvHistoryCart.adapter = CartHistoryAdapter(it,callback)
-            binding.rcvHistoryCart.layoutManager = LinearLayoutManager(context)
-            binding.iconLoading.apply {
-                clearAnimation()
-                visibility = View.GONE
+            lifecycleScope.launch {
+                delay(300)
+                binding.rcvHistoryCart.adapter = CartHistoryAdapter(it,callback)
+                binding.rcvHistoryCart.layoutManager = LinearLayoutManager(context)
+                if (it.isEmpty())
+                    binding.imgEmpty.visibility = View.VISIBLE
+                binding.iconLoading.apply {
+                    clearAnimation()
+                    visibility = View.GONE
+                }
             }
         })
+
+        viewModel.messageGetCart.observe(requireActivity(),{
+            it?.let { Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show() }
+        })
+
         binding.btnBack.setOnClickListener {
             this.findNavController().popBackStack()
         }
@@ -72,6 +86,9 @@ class OderHistoryFragment : Fragment() {
             OderHistoryFragmentDirections.actionOderHistoryFragmentToDetailHistoryFragment().apply {
                 findNavController().navigate(R.id.action_oderHistoryFragment_to_detailHistoryFragment,bundle)
             }
+        }
+
+        override fun itemClickWithCount(model: Any, countProduct: Int) {
         }
 
     }

@@ -35,6 +35,11 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(this)
             }
         }
+        binding.btnNews.setOnClickListener {
+            HomeFragmentDirections.actionHomeFragmentToNewsFragment().apply {
+                findNavController().navigate(this)
+            }
+        }
         return binding.root
     }
 

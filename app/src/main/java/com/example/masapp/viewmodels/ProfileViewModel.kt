@@ -12,6 +12,7 @@ import com.example.masapp.models.ProfileModel
 import com.example.masapp.models.User
 import com.example.masapp.models.UserRespones
 import com.example.masapp.retofitAPI.massApi
+import com.example.masapp.utils.SingleLiveEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,7 +27,7 @@ import retrofit2.Response
 ///
 */class ProfileViewModel: ViewModel() {
     val profile = MutableLiveData<ProfileModel>()
-    val responseMess = MutableLiveData<String>()
+    val responseMess = SingleLiveEvent<String>()
 
     fun getProfile(id: Long, author: String){
         val call = massApi().profileService.getProfile(id,"Bearer $author")

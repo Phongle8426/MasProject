@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.masapp.R
@@ -20,6 +21,8 @@ import com.example.masapp.models.CivilianModel
 import com.example.masapp.ui.activity.LoginActivity
 import com.example.masapp.utils.ItemClick
 import com.example.masapp.viewmodels.CivilianViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class familyFragment : Fragment() {
     private lateinit var binding: FragmentFamilyBinding
@@ -44,13 +47,17 @@ class familyFragment : Fragment() {
             startAnimation(animationLoading)
         }
         viewModel.civilians.observe(requireActivity(), androidx.lifecycle.Observer {
-            if (it != null){
-                Log.d("lis", it.toString())
-                binding.rcvFamilyMember.adapter = FamilyAdapter(it,callback)
-                binding.rcvFamilyMember.layoutManager = LinearLayoutManager(context)
-                binding.iconLoading.apply {
-                    clearAnimation()
-                    visibility = View.GONE
+            lifecycleScope.launch {
+                it?.let {
+                    delay(500)
+                    binding.rcvFamilyMember.layoutManager = LinearLayoutManager(context)
+                    binding.rcvFamilyMember.adapter = FamilyAdapter(it,callback)
+                    if (it.isEmpty())
+                        binding.imgEmpty.visibility = View.VISIBLE
+                    binding.iconLoading.apply {
+                        clearAnimation()
+                        visibility = View.GONE
+                    }
                 }
             }
         })
@@ -78,9 +85,13 @@ class familyFragment : Fragment() {
             val civilianModel = model as CivilianModel
             val bundle = Bundle()
             bundle.putSerializable("member", civilianModel)
+            bundle.putString("author", uToken)
             familyFragmentDirections.actionFamilyFragmentToFamilyDetailFragment().apply {
                 findNavController().navigate(R.id.action_familyFragment_to_familyDetailFragment,bundle)
             }
+        }
+
+        override fun itemClickWithCount(model: Any, countProduct: Int) {
         }
     }
 }

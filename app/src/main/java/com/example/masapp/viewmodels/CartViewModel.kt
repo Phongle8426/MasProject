@@ -7,35 +7,36 @@ import com.example.masapp.models.ProductModel
 import com.example.masapp.models.RequestCartModel
 import com.example.masapp.models.RequestProductModel
 import com.example.masapp.retofitAPI.massApi
+import com.example.masapp.utils.SingleLiveEvent
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.SocketTimeoutException
 
-/*
-///
-/// Project: MasApp
-/// Created by pc on 11/27/2021.
-///
-*/class CartViewModel : ViewModel() {
+class CartViewModel : ViewModel() {
     private val _carts = MutableLiveData<List<RequestProductModel>>()
     val carts get() = _carts
     val cartsHistory = MutableLiveData<List<RequestCartModel>>()
     val cartDetailHistory = MutableLiveData<RequestCartModel>()
-//    val cart get() = _carts.value
     val products = MutableLiveData<List<ProductModel>>()
     val totalPrice = MutableLiveData<String>()
-    val responseMess = MutableLiveData<String>()
+    val messageSaveCart = SingleLiveEvent<String>()
+    val messageGetCart = SingleLiveEvent<String>()
+    val messageGetProduct = SingleLiveEvent<String>()
+    val messageGetCartById = SingleLiveEvent<String>()
+
 
     fun addProduct(products: List<RequestProductModel>) {
-        _carts.value = listOf()
         _carts.postValue(products)
     }
     fun calculatePrice(){
         var total = 0
-        for (it in _carts.value!!){
-            total += (it.quantity * it.price.toInt())
+        if (_carts.value!!.isNotEmpty()){
+            for (it in _carts.value!!){
+                total += (it.quantity * it.price.toInt())
+            }
+            totalPrice.postValue(total.toString())
         }
-        totalPrice.value = total.toString()
     }
 
     fun saveCart(cart: RequestCartModel,author: String){
@@ -43,14 +44,18 @@ import retrofit2.Response
         call.enqueue(object : Callback<List<RequestCartModel>>{
             override fun onResponse(call: Call<List<RequestCartModel>>, response: Response<List<RequestCartModel>>) {
                 if (response.code() == 200){
-                    responseMess.postValue("Đặt hàng thành công!")
+                    messageSaveCart.postValue("Đặt hàng thành công!")
                 }else{
-                    responseMess.postValue("Thất bại, vui lòng thử lại!")
+                    messageSaveCart.postValue("Thất bại, vui lòng thử lại!")
                 }
             }
 
             override fun onFailure(call: Call<List<RequestCartModel>>, t: Throwable) {
-
+                if(t is SocketTimeoutException){
+                    messageSaveCart.postValue("Kết nối quá hạn!")
+                }else{
+                    messageSaveCart.postValue("Yêu cầu không thành công")
+                }
             }
 
         })
@@ -63,12 +68,16 @@ import retrofit2.Response
                 if (response.code() == 200){
                     cartsHistory.postValue(response.body())
                 }else{
-                    responseMess.postValue("Thất bại, vui lòng thử lại!")
+                    messageGetCart.postValue("Thất bại, vui lòng thử lại!")
                 }
             }
 
             override fun onFailure(call: Call<List<RequestCartModel>>, t: Throwable) {
-
+                if(t is SocketTimeoutException){
+                    messageGetCart.postValue("Kết nối quá hạn!")
+                }else{
+                    messageGetCart.postValue("Yêu cầu không thành công")
+                }
             }
 
         })
@@ -82,12 +91,16 @@ import retrofit2.Response
                     Log.d("TAG", "onResponse: thanh cong")
                     products.postValue(response.body())
                 }else{
-                    responseMess.postValue("Thất bại, vui lòng thử lại!")
+                    messageGetProduct.postValue("Thất bại, vui lòng thử lại!")
                 }
             }
 
             override fun onFailure(call: Call<List<ProductModel>>, t: Throwable) {
-
+                if(t is SocketTimeoutException){
+                    messageGetProduct.postValue("Kết nối quá hạn!")
+                }else{
+                    messageGetProduct.postValue("Yêu cầu không thành công")
+                }
             }
 
         })
@@ -101,12 +114,16 @@ import retrofit2.Response
                      Log.d("TAG", "onResponse: thanh cong")
                      cartDetailHistory.postValue(response.body())
                  }else{
-                     responseMess.postValue("Thất bại, vui lòng thử lại!")
+                     messageGetCartById.postValue("Thất bại, vui lòng thử lại!")
                  }
              }
 
              override fun onFailure(call: Call<RequestCartModel>, t: Throwable) {
-
+                 if(t is SocketTimeoutException){
+                     messageGetCartById.postValue("Kết nối quá hạn!")
+                 }else{
+                     messageGetCartById.postValue("Yêu cầu không thành công")
+                 }
              }
 
          })
